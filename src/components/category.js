@@ -1,7 +1,23 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-const Category = (() => (
-	<div className="pt-card">Category</div>
-))
+import {setCategory} from '../actions/category'
+
+const mapDispatchToProps = ((dispatch) => ({
+	onComponentWillMount: (() => dispatch(setCategory('My Category')))
+}))
+
+@connect(null, mapDispatchToProps)
+class Category extends React.Component {
+	componentWillMount() {
+		this.props.onComponentWillMount()
+	}
+
+	render() {
+		return (
+			<div className="pt-card">Category</div>
+		)
+	}
+}
 
 export default Category

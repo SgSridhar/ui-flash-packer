@@ -1,5 +1,6 @@
-import {createStore} from 'redux'
-import {rootReducer, getInitialState} from './reducers/root-reducer'
+import {createStore, applyMiddleware} from 'redux'
+import {createEpicMiddleware} from 'redux-observable'
+import {rootReducer, rootEpic, getInitialState} from './reducers/root-reducer'
 
 let store
 
@@ -7,7 +8,8 @@ export default function getStore() {
 	if (!store) {
 		store = createStore(
 			rootReducer,
-			getInitialState()
+			getInitialState(),
+			applyMiddleware(createEpicMiddleware(rootEpic))
 		)
 	}
 

@@ -1,4 +1,6 @@
 import {STATUS_LOADING} from '../constants'
+import {SET_CATEGORY} from '../actions/category'
+import {getPlaces} from '../actions/places'
 
 export const INIT_CATEGORY = {
 	status: STATUS_LOADING,
@@ -14,4 +16,10 @@ export function category(state = INIT_CATEGORY, action) {
 	default:
 		return state
 	}
+}
+
+export function categoryEpic(action$) {
+	return action$
+		.ofType(SET_CATEGORY)
+		.map((action) => getPlaces(action.payload.category))
 }
