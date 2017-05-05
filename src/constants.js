@@ -1,0 +1,1 @@
+export const STATUS_LOADING = 'STATUS_LOADING'

@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
 import {Spinner, Intent} from '@blueprintjs/core'
+import getStore from './store'
+
+const store = getStore()
 
 import './less/app.main.less'
 
@@ -11,4 +15,4 @@ const App  = () => (
 	<Spinner intent={Intent.PRIMARY} />
 )
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('app'))
