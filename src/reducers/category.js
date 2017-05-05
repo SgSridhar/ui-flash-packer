@@ -1,6 +1,9 @@
+import {Observable} from 'rxjs'
 import {STATUS_LOADING} from '../constants'
-import {SET_CATEGORY} from '../actions/category'
+import {SET_CATEGORY, receiveCategoriesError} from '../actions/category'
 import {getPlaces} from '../actions/places'
+
+import {getCategories$} from '../utils/api'
 
 export const INIT_CATEGORY = {
 	status: STATUS_LOADING,
@@ -21,5 +24,11 @@ export function category(state = INIT_CATEGORY, action) {
 export function categoryEpic(action$) {
 	return action$
 		.ofType(SET_CATEGORY)
-		.map((action) => getPlaces(action.payload.category))
+		.switchMap((action) =>
+			getCategories$()
+				.map(() => getPlaces(action.payload.category))
+				.catch((err) => {
+					return Observable.of(receiveCategoriesError(err))
+				})
+		)
 }
