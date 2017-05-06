@@ -13,7 +13,7 @@ function ajax$(config) {
 	})
 }
 
-function getAjax$(url) {
+export function getAjax$(url) {
 	return ajax$({method: 'GET', url})
 }
 
