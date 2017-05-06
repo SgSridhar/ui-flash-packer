@@ -3,6 +3,8 @@ import {
 	Component,
 } from "react"
 
+import {connect} from 'react-redux'
+
 import {
 	withGoogleMap,
 	GoogleMap,
@@ -10,79 +12,87 @@ import {
 	Marker,
 } from 'react-google-maps'
 
-const PopUpInfoWindowExampleGoogleMap = withGoogleMap(props => (
-	<GoogleMap
-		defaultZoom={7}
-		center={props.center}
-	>
-		{props.markers.map((marker, index) => (
-			<Marker
-				key={index}
-				position={marker.position}
-				onClick={() => props.onMarkerClick(marker)}
-			>
-				{/*
-				 Show info window only if the 'showInfo' key of the marker is true.
-				 That is, when the Marker pin has been clicked and 'onCloseClick' has been
-				 Successfully fired.
-				 */}
-				{marker.showInfo && (
-					<InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
-						<div>{marker.infoContent}</div>
-					</InfoWindow>
-				)}
-			</Marker>
-		))}
-	</GoogleMap>
-))
+const mapStateToProps = ((state) => ({
+	data: state.category.category ? state.category.category.filter((d) => (
+		!(d.location[0] === 0 && d.location[1] === 0)
+	)) : []
+}))
 
+const PopUpInfoWindowExampleGoogleMap = withGoogleMap(props => {
+	console.log(props)
+	return(
+			<GoogleMap
+				defaultZoom={7}
+				center={props.center}
+			>
+				{props.markers.map((marker, index) => (
+					<Marker
+						key={index}
+						position={marker.position}
+						onClick={() => props.onMarkerClick(marker)}
+					>
+						{/*
+						 Show info window only if the 'showInfo' key of the marker is true.
+						 That is, when the Marker pin has been clicked and 'onCloseClick' has been
+						 Successfully fired.
+						 */}
+						{marker.showInfo && (
+							<InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
+								<div>{marker.infoContent}</div>
+							</InfoWindow>
+						)}
+					</Marker>
+				))}
+			</GoogleMap>
+		)
+})
+
+@connect(mapStateToProps)
 export default class PopUpInfoWindowExample extends Component {
 
 	constructor(props) {
 		super(props)
+
 		this.state = {
 			center: {
 				lat: 13.0827,
 				lng: 80.2707,
 			},
-
+			selected: '',
 			// array of objects of markers
-			markers: [
-				{
-					position: new google.maps.LatLng(11.7667, 78.2333),
-					showInfo: false,
-					infoContent: (
-						<div>Yercaud</div>
-					),
+			markers: this.props.data.map((place) => ({
+				position: {
+					lat: place.location[1],
+					lng: place.location[0]
 				},
-				{
-					position: new google.maps.LatLng(11.4064, 76.6932),
-					showInfo: false,
-					infoContent: (
-						<div>Ooty</div>
-					),
-				},
-				{
-					position: new google.maps.LatLng(11.2485, 78.3387),
-					showInfo: false,
-					infoContent: (
-						<div>Kolli Hills</div>
-					),
-				},
-				{
-					position: new google.maps.LatLng(10.2381, 77.4892),
-					showInfo: false,
-					infoContent: (
-						<div>Kodaikanal</div>
-					),
-				},
-			],
+				showInfo: false,
+				infoContent: (
+					<div>place.name</div>
+				)
+			})),
 		}
 
 		this.handleMarkerClick = this.handleMarkerClick.bind(this)
 		this.handleMarkerClose = this.handleMarkerClose.bind(this)
 	}
 
+	componentWillReceiveProps(nextProps) {
+		console.log(nextProps)
+		if (this.props !== nextProps) {
+			this.setState({...this.state,
+				markers: nextProps.data.map((place) => ({
+					position: {
+						lat: place.location[1],
+						lng: place.location[0]
+					},
+					showInfo: false,
+					infoContent: (
+						<div>{place.name}</div>
+					)
+				})),
+			})
+		}
+	}
 	// Toggle to 'true' to show InfoWindow and re-renders component
 	handleMarkerClick(targetMarker) {
 		this.setState({
@@ -113,6 +123,7 @@ export default class PopUpInfoWindowExample extends Component {
 	}
 
 	render() {
+		console.log(this.state)
 		return (
 			<PopUpInfoWindowExampleGoogleMap
 				containerElement={
