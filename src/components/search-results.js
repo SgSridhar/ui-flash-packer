@@ -9,7 +9,7 @@ import kolli from '../assets/icons/kolli.png'
 import kodaikanal from '../assets/icons/kodaikanal.png'
 
 import {connect} from 'react-redux'
-
+import PlaceCard from './place-card'
 import {requestState} from '../actions/search-results'
 import {NEAR_ME} from '../constants'
 
@@ -17,6 +17,7 @@ const mapStateToProps = ((state) => {
 	return ({
 		category: state.category.category,
 		radius: state.category.radius,
+		data: state.category.data,
 	})
 })
 
@@ -30,6 +31,28 @@ class SearchResults extends React.Component {
 		this.props.onComponentWillMount(this.props.category, this.props.radius === NEAR_ME ? 'Tamil Nadu' : '')
 	}
 	render() {
+		const sortedPlaces = this.props.data ?
+			R.sort(this.props.radius === NEAR_ME ?
+					R.prop('reviewStateRate') : R.prop('reviewCountryRate'),
+			this.props.data) : []
+
+		const cards = (() => {
+			if(this.props.data) {
+				return R.map((d) => {
+					return (
+						<PlaceCard info={d} radius="{this.props.radius}"/>
+					)
+				})(sortedPlaces)
+			}
+			return null
+		})()
+
+		// const cards = this.props.data ? R.map((d) => {
+		// 	return(
+		// 		<PlaceCard info={d} radius="{this.props.radius}"/>
+		// 	)
+		// })(this.props.data) : return null
+
 		return(
 			<div className="search-results-page-container">
 				<Header/>
@@ -44,83 +67,7 @@ class SearchResults extends React.Component {
 							<button className="pt-button">Best Rated</button>
 						</div>
 						<div className="places-list">
-							<div className="place-card">
-								<div className="place-picture">
-									<img src={yercaud} width={200} height={200} alt="Yercaud" />
-								</div>
-								<div className="place-information">
-									<div className="name-rating">
-										<div className="place-name">Yercaud</div>
-										<div className="place-rating">
-											<span className="pt-icon-large pt-icon-star"></span>
-											<div>4.5</div>
-										</div>
-									</div>
-									<div className="distance">6.5 hours away</div>
-									<div className="tourist-influx">
-										<div className="label">Tourist Influx Level : </div>
-										<div>LOW</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="place-card">
-								<div className="place-picture">
-									<img src={kolli} width={200} height={200} alt="Kolli" />
-								</div>
-								<div className="place-information">
-									<div className="name-rating">
-										<div className="place-name">Kolli Hills</div>
-										<div className="place-rating">
-											<span className="pt-icon-large pt-icon-star"></span>
-											<div>4.0</div>
-										</div>
-									</div>
-									<div className="distance">6.5 hours away</div>
-									<div className="tourist-influx">
-										<div className="label">Tourist Influx Level : </div>
-										<div>MEDIUM</div>
-									</div>
-								</div>
-							</div>
-							<div className="place-card">
-								<div className="place-picture">
-									<img src={ooty} width={200} height={200} alt="Ooty" />
-								</div>
-								<div className="place-information">
-									<div className="name-rating">
-										<div className="place-name">Ooty</div>
-										<div className="place-rating">
-											<span className="pt-icon-large pt-icon-star"></span>
-											<div>3.5</div>
-										</div>
-									</div>
-									<div className="distance">10 hours away</div>
-									<div className="tourist-influx">
-										<div className="label">Tourist Influx Level : </div>
-										<div>HIGH</div>
-									</div>
-								</div>
-							</div>
-							<div className="place-card">
-								<div className="place-picture">
-									<img src={kodaikanal} width={200} height={200} alt="kodaikanal" />
-								</div>
-								<div className="place-information">
-									<div className="name-rating">
-										<div className="place-name">Kodaikanal</div>
-										<div className="place-rating">
-											<span className="pt-icon-large pt-icon-star"></span>
-											<div>3.0</div>
-										</div>
-									</div>
-									<div className="distance">9.5 hours away</div>
-									<div className="tourist-influx">
-										<div className="label">Tourist Influx Level : </div>
-										<div>HIGH</div>
-									</div>
-								</div>
-							</div>
+							{cards}
 						</div>
 					</div>
 					<div className="map-view"><PopUpInfoWindowExample/></div>
