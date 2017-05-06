@@ -1,0 +1,59 @@
+.search-results-page-container {
+	//background-color: black;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+
+	.search-results {
+		background-color: pink;
+		display: flex;
+		flex:1;
+		.places {
+			background-color: blueviolet;
+			width: 40%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			.search-description {
+				height: 48px;
+				padding-top: 0.5em;
+				padding-left: 0.5em;
+				font-size: 20px;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			}
+			.pt-button-group {
+				margin: 0 auto;
+				margin-left: 0.3em;
+				height: 48px;
+				line-height: 0.2;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				width: 100%;
+
+				.recommended {
+					width: 200px;
+					line-height: 14px;
+					word-wrap: break-word;
+					background: #009a9c;
+				}
+				.pt-button {
+					//width: 200px;
+					width: 33%;
+				}
+			}
+			.places-list {
+				display: flex;
+				flex-direction: column;
+				.place-card {
+					display: flex;
+					.place-information {
+
+					}
+				}
+			}
+		}
+		.map-view {
+			background-color: green;
+			width: 60%;
+		}
+	}
+}

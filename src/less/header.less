@@ -1,0 +1,44 @@
+.header {
+	//background-color: yellow;
+	width: 1024px;
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	.logo {
+		flex: 0.7;
+		margin: auto;
+		display: flex;
+	}
+	.action-buttons-container {
+		display: flex;
+		flex: 0.3;
+		justify-content: space-between;
+
+		.about{
+			margin: auto;
+			a {
+				color: #009a9c;
+				font-weight: bold;
+			}
+		}
+		.sign-up{
+			margin: auto 0;
+			margin-left: 4em;
+
+			.pt-button {
+				background: #36454f;
+				color: white;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			}
+		}
+		.login{
+			margin: auto;
+			.pt-button {
+				background-color: #36454f;
+				background: none;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			}
+		}
+	}
+}
