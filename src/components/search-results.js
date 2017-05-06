@@ -8,7 +8,19 @@ import ooty from '../assets/icons/ooty.png'
 import kolli from '../assets/icons/kolli.png'
 import kodaikanal from '../assets/icons/kodaikanal.png'
 
+import {connect} from 'react-redux'
+
+import {requestState} from '../actions/search-results'
+
+const mapDispatchToProps = ((dispatch) => ({
+	onComponentWillMount: ((state) => dispatch(requestState(state)))
+}))
+
+@connect(null, mapDispatchToProps)
 class SearchResults extends React.Component {
+	componentWillMount() {
+		this.props.onComponentWillMount('Tamil Nadu')
+	}
 	render() {
 		return(
 			<div className="search-results-page-container">

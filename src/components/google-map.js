@@ -12,7 +12,7 @@ import {
 
 const PopUpInfoWindowExampleGoogleMap = withGoogleMap(props => (
 	<GoogleMap
-		defaultZoom={4}
+		defaultZoom={7}
 		center={props.center}
 	>
 		{props.markers.map((marker, index) => (

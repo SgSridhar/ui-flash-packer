@@ -21,6 +21,6 @@ function postAjax$(url) {
 	return ajax$({method: 'POST', url})
 }
 
-export function getCategories$() {
-	return getAjax$('/test')
+export function getCategories$(state) {
+	return getAjax$(`/places?state=${state}`)
 }

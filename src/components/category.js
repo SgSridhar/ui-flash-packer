@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {setCategory} from '../actions/category'
+import {setCategory} from '../actions/search-results'
 
 const mapDispatchToProps = ((dispatch) => ({
 	onComponentWillMount: (() => dispatch(setCategory('My Category')))
