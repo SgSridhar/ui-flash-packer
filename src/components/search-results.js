@@ -11,15 +11,23 @@ import kodaikanal from '../assets/icons/kodaikanal.png'
 import {connect} from 'react-redux'
 
 import {requestState} from '../actions/search-results'
+import {NEAR_ME} from '../constants'
+
+const mapStateToProps = ((state) => {
+	return ({
+		category: state.category.category,
+		radius: state.category.radius,
+	})
+})
 
 const mapDispatchToProps = ((dispatch) => ({
-	onComponentWillMount: ((state) => dispatch(requestState(state)))
+	onComponentWillMount: ((category, state) => dispatch(requestState(category, state)))
 }))
 
-@connect(null, mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 class SearchResults extends React.Component {
 	componentWillMount() {
-		this.props.onComponentWillMount('Tamil Nadu')
+		this.props.onComponentWillMount(this.props.category, this.props.radius === NEAR_ME ? 'Tamil Nadu' : '')
 	}
 	render() {
 		return(
