@@ -5,11 +5,12 @@
 	flex: 1;
 
 	.search-results {
-		background-color: pink;
+		//background-color: #36454f;
 		display: flex;
 		flex:1;
 		.places {
-			background-color: blueviolet;
+			//background-color: blueviolet;
+			border-top: 2px solid #DEDEDE;
 			width: 40%;
 			display: flex;
 			flex-direction: column;
@@ -19,6 +20,7 @@
 				padding-top: 0.5em;
 				padding-left: 0.5em;
 				font-size: 20px;
+				//color: white;
 				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 			}
 			.pt-button-group {
@@ -34,6 +36,7 @@
 					line-height: 14px;
 					word-wrap: break-word;
 					background: #009a9c;
+					color: white;
 				}
 				.pt-button {
 					//width: 200px;
@@ -43,10 +46,42 @@
 			.places-list {
 				display: flex;
 				flex-direction: column;
+				width: 100%;
+				margin-top: 1em;
 				.place-card {
 					display: flex;
-					.place-information {
+					width: 100%;
+					background-color: white;
+					border-top: 2px solid #DEDEDE;
 
+					.place-picture {
+						img {
+							//border-radius: 5px;
+						}
+					}
+					.place-information {
+						display: flex;
+						flex-direction: column;
+						flex: 1;
+						padding: 1em;
+						margin-left : 1em;
+						font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+						.name-rating {
+							display: flex;
+							justify-content: space-between;
+
+							.place-name {
+								font-size: 20px;
+							}
+						}
+						.distance {
+							margin-top: 0.7em;
+							font-size: 15px;
+						}
+						.tourist-influx {
+							margin-top: 0.7em;
+							display: flex;
+						}
 					}
 				}
 			}
