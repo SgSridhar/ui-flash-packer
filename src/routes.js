@@ -7,7 +7,7 @@ import LandingPage from './components/landing-page'
 const history = createHistory()
 
 import RootApp from './components/root'
-import Category from './components/category'
+import About from './components/about'
 import SearchResults from './components/search-results'
 
 const AppRoute = (() => (
@@ -15,7 +15,7 @@ const AppRoute = (() => (
 		<div className="inner-app">
 			<Route exact path="/" component={LandingPage} />
 			<Route path="/places" component={SearchResults} />
-			<Route path="/category" component={Category} />
+			<Route path="/about" component={About} />
 		</div>
 	</Router>
 ))
