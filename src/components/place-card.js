@@ -1,6 +1,7 @@
 import React from 'react'
 import R from 'ramda'
 
+import fetchPhoto from '../utils/fetchPhoto'
 import {NEAR_ME} from '../constants'
 import yercaud from '../assets/icons/yercaud.png'
 
@@ -17,13 +18,14 @@ class PlaceCard extends React.Component {
 						<div className="place-rating">
 							<span className="pt-icon-large pt-icon-star"></span>
 							<div>{this.props.radius === NEAR_ME ?
-								this.props.info.reviewStateRate : this.props.info.reviewCountryRate}</div>
+								this.props.info.reviewStateRate.toFixed(1)
+								: this.props.info.reviewCountryRate.toFixed(1)}</div>
 						</div>
 					</div>
-					<div className="distance">6.5 hours away</div>
+					<div className="distance">{this.props.info.distance.toFixed(2)} hours away</div>
 					<div className="tourist-influx">
-						<div className="label">Tourist Influx Level : </div>
-						<div>{this.props.info.stateInflux}</div>
+						<div className="label">Tourist Influx Level </div>
+						<div className={`flux-state ${this.props.info.stateInflux}`}>{this.props.info.stateInflux}</div>
 					</div>
 				</div>
 			</div>

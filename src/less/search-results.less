@@ -74,15 +74,44 @@
 
 							.place-name {
 								font-size: 20px;
+								color: #36454f;
+							}
+							.place-rating {
+								div {
+									color: #009a9c;
+								}
 							}
 						}
 						.distance {
 							margin-top: 0.7em;
 							font-size: 15px;
+							color: #676767;
 						}
 						.tourist-influx {
 							margin-top: 0.7em;
 							display: flex;
+							color: #676767;
+
+							.flux-state {
+								border-radius: 2px;
+								padding: 2px;
+								color: black;
+								margin-left: 10px;
+								font-size: 12px;
+								font-weight: bold;
+							}
+
+							.flux-state.HIGH {
+								color: red;
+							}
+
+							.flux-state.LOW {
+								color: green;
+							}
+
+							.flux-state.MID {
+								color: olive;
+							}
 						}
 					}
 				}

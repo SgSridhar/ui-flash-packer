@@ -11,7 +11,7 @@ import kodaikanal from '../assets/icons/kodaikanal.png'
 import {connect} from 'react-redux'
 import PlaceCard from './place-card'
 import {requestState} from '../actions/search-results'
-import {NEAR_ME} from '../constants'
+import {NEAR_ME, HILL_STATION} from '../constants'
 
 const mapStateToProps = ((state) => {
 	return ({
@@ -31,11 +31,10 @@ class SearchResults extends React.Component {
 		this.props.onComponentWillMount(this.props.category, this.props.radius === NEAR_ME ? 'Tamil Nadu' : '')
 	}
 	render() {
+		console.log('data', this.props.data)
 		const sortedPlaces = this.props.data ?
-			R.sort(this.props.radius === NEAR_ME ?
-					R.prop('reviewStateRate') : R.prop('reviewCountryRate'),
-			this.props.data) : []
-
+			R.sort(R.prop('reviewStateRate'), this.props.data) : []
+		console.log('sorted data', sortedPlaces)
 		const cards = (() => {
 			if(this.props.data) {
 				return R.map((d) => {
@@ -47,11 +46,7 @@ class SearchResults extends React.Component {
 			return null
 		})()
 
-		// const cards = this.props.data ? R.map((d) => {
-		// 	return(
-		// 		<PlaceCard info={d} radius="{this.props.radius}"/>
-		// 	)
-		// })(this.props.data) : return null
+		const desc2 = this.props.radius === NEAR_ME ? 'Exploring spots near me ...': 'Exploring spots within India ...'
 
 		return(
 			<div className="search-results-page-container">
@@ -59,7 +54,7 @@ class SearchResults extends React.Component {
 				<div className="search-results">
 					<div className="places">
 						<div className="search-description">
-							Hill Stations near Chennai ..
+							{desc2}
 						</div>
 						<div className="filters-group pt-button-group">
 							<button className="pt-button recommended">Flashpacker Recommendations</button>

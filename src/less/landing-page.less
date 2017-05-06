@@ -28,6 +28,7 @@
 				margin: 2em 0;
 			}
 			.radius-selector {
+				margin-top: 1em;
 				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 				.active {
 					background: #009a9c;
@@ -35,6 +36,9 @@
 				.pt-button {
 					border: none;
 				}
+			}
+			.go {
+				margin-top: 1em;
 			}
 			.search-bar {
 				width: 400px;
@@ -50,30 +54,36 @@
 			}
 			.default-categories {
 				display: flex;
-				width: 300px;
+				width: 200px;
 				justify-content: space-between;
-				//display: none;
+				.pt-button {
+					box-shadow: none;
+				}
 				.hill-stations {
-					background-color: yellow;
-					border: 1px dashed brown;
+					background: transparent;
 					padding: 0.6em;
+					height: 80px;
+					color: white;
+					img {
+						margin-left: 0.1em;
+					}
 				}
 				.beaches {
-					background-color: yellow;
-					border: 1px dashed brown;
+					background: transparent;
 					padding: 0.6em;
+					color: white;
+					height: 80px;
+					img {
+						margin-left: 0.2em;
+					}
 				}
 				.active {
-					background-color: green;
+					background-color: #009a9c;
+					padding-top: 0px;
+					padding-bottom: 0px;
 				}
 			}
-			.my-location {
-				display: flex;
-				color: #009a9c;
-				div {
-					text-decoration: underline;
-				}
-			}
+
 		}
 	}
 	.footer {
