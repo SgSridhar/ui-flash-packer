@@ -48,8 +48,11 @@
   },
   "dependencies": {
     "@blueprintjs/core": "1.16.0",
+    "geolib": "^2.0.22",
+    "google-distance": "^1.0.1",
     "history": "^4.6.1",
     "ramda": "0.23.0",
-    "react-google-maps": "^6.3.0"
+    "react-google-maps": "^6.3.0",
+    "request": "^2.81.0"
   }
 }
