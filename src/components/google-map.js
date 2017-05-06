@@ -13,7 +13,7 @@ import {
 } from 'react-google-maps'
 
 const mapStateToProps = ((state) => ({
-	data: state.category.category ? state.category.category.filter((d) => (
+	data: state.category && state.category.data ? state.category.data.filter((d) => (
 		!(d.location[0] === 0 && d.location[1] === 0)
 	)) : []
 }))
