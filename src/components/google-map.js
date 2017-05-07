@@ -77,7 +77,6 @@ export default class PopUpInfoWindowExample extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps)
 		if (this.props !== nextProps) {
 			this.setState({...this.state,
 				markers: nextProps.data.map((place) => ({
@@ -123,7 +122,6 @@ export default class PopUpInfoWindowExample extends Component {
 	}
 
 	render() {
-		console.log(this.state)
 		return (
 			<PopUpInfoWindowExampleGoogleMap
 				containerElement={

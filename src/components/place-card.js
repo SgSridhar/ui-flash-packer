@@ -1,7 +1,5 @@
 import React from 'react'
-import R from 'ramda'
 
-import fetchPhoto from '../utils/fetchPhoto'
 import {NEAR_ME} from '../constants'
 import yercaud from '../assets/icons/yercaud.png'
 
@@ -31,11 +29,6 @@ class PlaceCard extends React.Component {
 			</div>
 		)
 	}
-}
-
-PlaceCard.propTypes = {
-	info: PropTypes.shape.isRequired,
-	radius: PropTypes.string.isRequired,
 }
 
 export default PlaceCard

@@ -17,14 +17,10 @@ export function getAjax$(url) {
 	return ajax$({method: 'GET', url})
 }
 
-function postAjax$(url) {
-	return ajax$({method: 'POST', url})
-}
-
 export function getCategories$(state, city, category) {
 	const query = []
 	if (state) query.push(`state=${state}`)
 	if (city) query.push(`city=${city}`)
 	if (category) query.push(`category=${category}`)
-	return getAjax$(`/places?${query.join('&')}`)
+	return getAjax$(`/places?${query.join('&')}`).filter((d) => !R.isEmpty(d.checkins) && !R.isEmpty(d.location))
 }
