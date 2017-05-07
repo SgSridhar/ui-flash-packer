@@ -79,7 +79,7 @@ class SearchResults extends React.Component {
 			if(this.props.data) {
 				return R.map((d) => {
 					return (
-						<PlaceCard info={d} radius={this.props.radius} />
+						<PlaceCard info={d} radius={this.props.radius} category={this.props.category} />
 					)
 				})(this.state.selectedFilter !== NEAREST ? R.reverse(sortedPlaces) : sortedPlaces)
 			}
